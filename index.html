@@ -86,6 +86,18 @@
             box-shadow: 0 12px 24px -8px rgba(70, 40, 20, 0.08);
             border: 1px solid #efe1cf;
         }
+        .dimension-indicator {
+            display: inline-block;
+            background: #efe1cf;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            color: #5e3f28;
+        }
+        .dimension-indicator i {
+            margin-right: 6px;
+        }
         .question-number {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -100,18 +112,6 @@
             line-height: 1.3;
             margin-bottom: 28px;
             color: #342419;
-        }
-        .dimension-indicator {
-            display: inline-block;
-            background: #efe1cf;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-            color: #5e3f28;
-        }
-        .dimension-indicator i {
-            margin-right: 6px;
         }
         .options-container {
             display: flex;
@@ -331,7 +331,7 @@
                 (<span id="dimensionRange">G ⇄ S</span>)
             </div>
             <div class="question-number" id="questionNumLabel">第 1 题</div>
-            <div class="question-text" id="questionText">加载中...</div>
+            <div class="question-text" id="questionText">吃火锅、冰饮、重油外卖后，你的肠道状态是？</div>
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
@@ -365,6 +365,9 @@
 <script>
     (function(){
         "use strict";
+
+        // 调试标志
+        console.log('肠格测试初始化开始...');
 
         // ---------- 维度配置 ----------
         const dimensions = [
@@ -605,8 +608,8 @@
         // ---------- 16型肠格库 ----------
         const typeDetails = {
             "GNTI": { nickname: "无Bug玩家", desc: "强韧耐受＋内源自给＋规律顺畅＋屏障完整。肠道状态堪称完美，冷热混吃、换环境几乎无不适，有益菌主导，黏膜屏障稳固，免疫代谢在线。" },
-            "GNTD": { nickname: "伪装者", desc: "饮食健康、排便顺畅，但屏障已受损。表面自信，却忽略熬夜/压力/抗生素的隐患，可能出现乏力爆痘，但仍坚信"我肠道很好"。" },
-            "GNUI": { nickname: "忍者神龟", desc: "耐受好、营养足、屏障佳，但节律紊乱。久坐憋便、饮水少，肠道不蠕动，常常便秘胀气，明明硬件很好，却卡在"下水道"。" },
+            "GNTD": { nickname: "伪装者", desc: "饮食健康、排便顺畅，但屏障已受损。表面自信，却忽略熬夜/压力/抗生素的隐患，可能出现乏力爆痘，但仍坚信\"我肠道很好\"。" },
+            "GNUI": { nickname: "忍者神龟", desc: "耐受好、营养足、屏障佳，但节律紊乱。久坐憋便、饮水少，肠道不蠕动，常常便秘胀气，明明硬件很好，却卡在\"下水道\"。" },
             "GNUD": { nickname: "人形陀螺/高压锅", desc: "耐受、营养不错，但节律紊乱＋屏障受损。工位一坐一天，熬夜加班、应酬喝酒、滥用抗生素，KPI压力拉满，肠道长期高压。" },
             "GATI": { nickname: "天选干饭人", desc: "耐受强、外补依赖、节律顺、屏障好。虽然常吃外卖/补剂，但肠道依然抗造，排便顺畅。又吃外卖又吃补剂，你这辈子有了！" },
             "GATD": { nickname: "小强COSER", desc: "表面耐受、排便顺畅，实则外补依赖＋屏障受损。假性健康，神经麻木，硬装没事，但内里已经开始透支。" },
@@ -616,7 +619,7 @@
             "SNTD": { nickname: "自律二极管", desc: "敏感肠，但营养/节律自律；然而熬夜酗酒导致屏障受损。一边极致自律饮食，一边放纵伤害，肠道时好时坏。" },
             "SNUI": { nickname: "无效内卷人/内耗之王", desc: "敏感肠，营养好、节律乱、屏障好。饮食作息比谁都懂，却连基本的排便自由都没有，被腹泻和便秘反复折磨，养肠功课全白费。" },
             "SNUD": { nickname: "被鞭策的驴", desc: "肠道敏感所以饮食健康，但其他方向无限放纵：熬夜酗酒、久坐憋便，屏障受损＋节律紊乱。一边自律一边作死。" },
-            "SATI": { nickname: "宣示者 FLAG", desc: "敏感＋外补依赖＋节律顺＋屏障好。每次大吃都肚子疼，但还要大吃。别人放屁是"噗"，你放屁是"吃完这顿就不吃了"。" },
+            "SATI": { nickname: "宣示者 FLAG", desc: "敏感＋外补依赖＋节律顺＋屏障好。每次大吃都肚子疼，但还要大吃。别人放屁是\"噗\"，你放屁是\"吃完这顿就不吃了\"。" },
             "SATD": { nickname: "摆烂人", desc: "敏感＋外补依赖＋节律顺＋屏障受损。肚子痛吃补剂，熬夜酗酒吃补剂，只要能拉就行，完全摆烂。" },
             "SAUI": { nickname: "休息者", desc: "敏感＋外补依赖＋节律紊乱＋屏障好。不好好吃饭、不按时上厕所，靠补剂活着，但身体还行，大概时间都用来休息了。" },
             "SAUD": { nickname: "瓷娃娃", desc: "敏感＋外补依赖＋节律紊乱＋屏障受损。啥啥都不行选手，肠道全线脆弱，一碰就碎。" }
@@ -627,44 +630,65 @@
         let answers = new Array(questions.length).fill(null); // 存储分数1-5
         let testCompleted = false;
 
-        // DOM
-        const testSection = document.getElementById('testSection');
-        const resultSection = document.getElementById('resultSection');
-        const questionText = document.getElementById('questionText');
-        const questionNumLabel = document.getElementById('questionNumLabel');
-        const dimensionName = document.getElementById('dimensionName');
-        const dimensionRange = document.getElementById('dimensionRange');
-        const optionsDiv = document.getElementById('optionsContainer');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const restartTestBtn = document.getElementById('restartTestBtn');
-        const retakeFromResultBtn = document.getElementById('retakeFromResultBtn');
-        const progressText = document.getElementById('progressText');
-        const progressFill = document.getElementById('progressFill');
-        const resultTypeCode = document.getElementById('resultTypeCode');
-        const resultNickname = document.getElementById('resultNickname');
-        const typeDescription = document.getElementById('typeDescription');
-        const dimensionBars = document.getElementById('dimensionBars');
-        const dimensionScores = document.getElementById('dimensionScores');
+        // DOM 元素 - 添加空值检查
+        function getElement(id) {
+            const el = document.getElementById(id);
+            if (!el) console.error(`元素 ${id} 未找到`);
+            return el;
+        }
+
+        const testSection = getElement('testSection');
+        const resultSection = getElement('resultSection');
+        const questionText = getElement('questionText');
+        const questionNumLabel = getElement('questionNumLabel');
+        const dimensionName = getElement('dimensionName');
+        const dimensionRange = getElement('dimensionRange');
+        const optionsDiv = getElement('optionsContainer');
+        const prevBtn = getElement('prevBtn');
+        const nextBtn = getElement('nextBtn');
+        const restartTestBtn = getElement('restartTestBtn');
+        const retakeFromResultBtn = getElement('retakeFromResultBtn');
+        const progressText = getElement('progressText');
+        const progressFill = getElement('progressFill');
+        const resultTypeCode = getElement('resultTypeCode');
+        const resultNickname = getElement('resultNickname');
+        const typeDescription = getElement('typeDescription');
+        const dimensionBars = getElement('dimensionBars');
+        const dimensionScores = getElement('dimensionScores');
 
         function updateProgress() {
             const answered = answers.filter(a => a !== null).length;
             const percent = (answered / questions.length) * 100;
-            progressFill.style.width = percent + '%';
-            progressText.innerText = `${answered} / ${questions.length}`;
+            if (progressFill) progressFill.style.width = percent + '%';
+            if (progressText) progressText.innerText = `${answered} / ${questions.length}`;
         }
 
         function renderQuestion() {
+            console.log(`渲染第 ${currentIndex + 1} 题`);
+            
+            // 检查关键元素
+            if (!questionText || !optionsDiv) {
+                console.error('关键DOM元素缺失');
+                return;
+            }
+            
             const q = questions[currentIndex];
+            if (!q) {
+                console.error('题目数据错误');
+                return;
+            }
+            
             const dim = dimensions[q.dimension];
             
+            // 更新题目文本
             questionText.innerText = q.text;
             questionNumLabel.innerText = `第 ${currentIndex+1} 题`;
-            dimensionName.innerText = dim.name;
-            dimensionRange.innerText = `${dim.left} (强) ⇄ ${dim.right} (弱)`;
+            if (dimensionName) dimensionName.innerText = dim.name;
+            if (dimensionRange) dimensionRange.innerText = `${dim.left} (强) ⇄ ${dim.right} (弱)`;
             
             const selectedScore = answers[currentIndex];
             
+            // 生成选项HTML
             let html = '';
             q.options.forEach((opt, idx) => {
                 const score = opt.score;
@@ -678,11 +702,13 @@
             });
             optionsDiv.innerHTML = html;
             
+            // 绑定点击事件
             document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const score = parseInt(btn.dataset.score);
+                btn.addEventListener('click', function(e) {
+                    const score = parseInt(this.dataset.score);
                     answers[currentIndex] = score;
-                    renderQuestion();
+                    console.log(`第${currentIndex+1}题选择分数: ${score}`);
+                    renderQuestion(); // 重新渲染高亮
                     updateProgress();
                     updateNavButtons();
                 });
@@ -693,18 +719,23 @@
         }
 
         function updateNavButtons() {
-            prevBtn.disabled = (currentIndex === 0);
+            if (prevBtn) prevBtn.disabled = (currentIndex === 0);
             const hasAnswer = answers[currentIndex] !== null;
-            if (currentIndex === questions.length - 1) {
-                nextBtn.innerHTML = '查看肠格 <i class="fas fa-check-circle"></i>';
-            } else {
-                nextBtn.innerHTML = '下一题 <i class="fas fa-arrow-right"></i>';
+            if (nextBtn) {
+                if (currentIndex === questions.length - 1) {
+                    nextBtn.innerHTML = '查看肠格 <i class="fas fa-check-circle"></i>';
+                } else {
+                    nextBtn.innerHTML = '下一题 <i class="fas fa-arrow-right"></i>';
+                }
+                nextBtn.disabled = !hasAnswer;
             }
-            nextBtn.disabled = !hasAnswer;
         }
 
         function goToPrev() {
-            if (currentIndex > 0) { currentIndex--; renderQuestion(); }
+            if (currentIndex > 0) { 
+                currentIndex--; 
+                renderQuestion(); 
+            }
         }
         
         function goToNext() {
@@ -718,30 +749,35 @@
         }
 
         function finishTest() {
+            console.log('完成测试，计算结果...');
+            
             if (answers.includes(null)) {
                 alert('请回答所有题目后再查看肠格。');
                 const firstNull = answers.findIndex(a => a === null);
-                if (firstNull !== -1) { currentIndex = firstNull; renderQuestion(); }
+                if (firstNull !== -1) { 
+                    currentIndex = firstNull; 
+                    renderQuestion(); 
+                }
                 return;
             }
             testCompleted = true;
             
             // 计算各维度总分 (每题1-5分，每个维度5题，总分5-25分)
             const scores = [0, 0, 0, 0]; // G/A/T/I 倾向分数
-            const counts = [0, 0, 0, 0]; // 各维度题目计数
             
             answers.forEach((score, idx) => {
                 const dim = questions[idx].dimension;
                 scores[dim] += score;
-                counts[dim]++;
             });
+            
+            console.log('维度得分:', scores);
             
             // 判定倾向：> 12.5 为左侧，≤ 12.5 为右侧
             const typeChars = [];
             for (let i = 0; i < 4; i++) {
-                const avgScore = scores[i]; // 总分
-                const threshold = 12.5; // 每维度5题，满分25分，中位数12.5
-                if (avgScore > threshold) {
+                const totalScore = scores[i];
+                const threshold = 12.5;
+                if (totalScore > threshold) {
                     typeChars.push(dimensions[i].left);
                 } else {
                     typeChars.push(dimensions[i].right);
@@ -749,22 +785,26 @@
             }
             
             const typeCode = typeChars.join('');
+            console.log('肠格类型:', typeCode);
+            
             const detail = typeDetails[typeCode] || { nickname: "未知肠格", desc: "独特而复杂的肠道人格。" };
             
-            resultTypeCode.innerText = typeCode;
-            resultNickname.innerText = detail.nickname;
-            typeDescription.innerText = detail.desc;
+            if (resultTypeCode) resultTypeCode.innerText = typeCode;
+            if (resultNickname) resultNickname.innerText = detail.nickname;
+            if (typeDescription) typeDescription.innerText = detail.desc;
             
             renderDimensionBars(scores);
             renderDimensionScores(scores);
             
-            testSection.classList.add('hidden');
-            resultSection.classList.remove('hidden');
+            if (testSection) testSection.classList.add('hidden');
+            if (resultSection) resultSection.classList.remove('hidden');
         }
 
         function renderDimensionBars(scores) {
+            if (!dimensionBars) return;
+            
             const createBar = (dimIdx, leftLabel, rightLabel, score) => {
-                const maxScore = 25; // 5题×5分
+                const maxScore = 25;
                 const leftPercent = (score / maxScore) * 100;
                 const rightPercent = 100 - leftPercent;
                 return `
@@ -793,6 +833,8 @@
         }
 
         function renderDimensionScores(scores) {
+            if (!dimensionScores) return;
+            
             const dimNames = ['耐受度', '营养供给', '节律', '屏障'];
             const leftNames = ['强韧(G)', '外补(A)', '规律(T)', '稳固(I)'];
             const rightNames = ['敏感(S)', '自给(N)', '紊乱(U)', '受损(D)'];
@@ -811,31 +853,40 @@
         }
 
         function resetTest() {
+            console.log('重置测试');
             currentIndex = 0;
             answers = new Array(questions.length).fill(null);
             testCompleted = false;
-            testSection.classList.remove('hidden');
-            resultSection.classList.add('hidden');
+            if (testSection) testSection.classList.remove('hidden');
+            if (resultSection) resultSection.classList.add('hidden');
             renderQuestion();
             updateProgress();
         }
 
-        prevBtn.addEventListener('click', goToPrev);
-        nextBtn.addEventListener('click', goToNext);
-        restartTestBtn.addEventListener('click', ()=>{
-            if(confirm('重新开始会丢失当前进度，确定吗？')) resetTest();
-        });
-        retakeFromResultBtn.addEventListener('click', resetTest);
+        // 绑定事件
+        if (prevBtn) prevBtn.addEventListener('click', goToPrev);
+        if (nextBtn) nextBtn.addEventListener('click', goToNext);
+        if (restartTestBtn) {
+            restartTestBtn.addEventListener('click', function() {
+                if(confirm('重新开始会丢失当前进度，确定吗？')) resetTest();
+            });
+        }
+        if (retakeFromResultBtn) {
+            retakeFromResultBtn.addEventListener('click', resetTest);
+        }
 
         // 键盘支持
-        window.addEventListener('keydown', (e) => {
-            if (testSection.classList.contains('hidden')) return;
-            if (e.key === 'ArrowLeft' && !prevBtn.disabled) goToPrev();
-            else if (e.key === 'ArrowRight' && !nextBtn.disabled) goToNext();
+        window.addEventListener('keydown', function(e) {
+            if (testSection && testSection.classList.contains('hidden')) return;
+            if (e.key === 'ArrowLeft' && prevBtn && !prevBtn.disabled) goToPrev();
+            else if (e.key === 'ArrowRight' && nextBtn && !nextBtn.disabled) goToNext();
         });
 
+        // 初始化渲染
+        console.log('开始渲染第一题...');
         renderQuestion();
         updateProgress();
+        console.log('初始化完成');
     })();
 </script>
 </body>
