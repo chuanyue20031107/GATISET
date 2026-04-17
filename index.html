@@ -95,37 +95,44 @@
             margin-bottom: 14px;
         }
         .question-text {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             line-height: 1.3;
             margin-bottom: 28px;
             color: #342419;
         }
+        .dimension-indicator {
+            display: inline-block;
+            background: #efe1cf;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            color: #5e3f28;
+        }
+        .dimension-indicator i {
+            margin-right: 6px;
+        }
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
         }
         .option-btn {
             background: #faf3e9;
             border: 1.8px solid #e0cfba;
-            border-radius: 26px;
-            padding: 18px 20px;
+            border-radius: 20px;
+            padding: 16px 18px;
             text-align: left;
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             font-weight: 500;
             color: #3f2e1f;
             transition: all 0.15s;
             cursor: pointer;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 14px;
             box-shadow: 0 3px 6px rgba(0,0,0,0.02);
-        }
-        .option-btn i {
-            font-size: 1.3rem;
-            width: 24px;
-            color: #b2906e;
         }
         .option-btn:hover {
             background: #efe0cf;
@@ -136,8 +143,25 @@
             border-color: #a47148;
             box-shadow: 0 6px 12px rgba(160, 100, 60, 0.1);
         }
-        .option-btn.selected i {
-            color: #7b4f2b;
+        .option-score {
+            display: inline-block;
+            min-width: 32px;
+            height: 32px;
+            background: #d4b48c;
+            color: white;
+            border-radius: 16px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .option-btn.selected .option-score {
+            background: #8b5e3c;
+        }
+        .option-text {
+            flex: 1;
+            line-height: 1.4;
         }
         .nav-buttons {
             display: flex;
@@ -253,6 +277,14 @@
             line-height: 1.55;
             color: #312219;
         }
+        .dimension-scores {
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0e6d8;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: #5a3f2b;
+        }
         .action-group {
             display: flex;
             gap: 12px;
@@ -294,7 +326,11 @@
         </div>
 
         <div class="test-card">
-            <div class="question-number" id="questionNumLabel">第 1 题 · 耐受度</div>
+            <div class="dimension-indicator" id="dimensionTag">
+                <i class="fas fa-shield-alt"></i> <span id="dimensionName">耐受度</span> 
+                (<span id="dimensionRange">G ⇄ S</span>)
+            </div>
+            <div class="question-number" id="questionNumLabel">第 1 题</div>
             <div class="question-text" id="questionText">加载中...</div>
             <div class="options-container" id="optionsContainer"></div>
         </div>
@@ -313,6 +349,7 @@
             <div class="result-type" id="resultTypeCode">GATI</div>
             <div class="type-nickname" id="resultNickname">天选干饭人</div>
             <div class="dimension-bars" id="dimensionBars"></div>
+            <div class="dimension-scores" id="dimensionScores"></div>
             <div class="description" id="typeDescription">肠道耐受、营养自给、节律顺畅、屏障稳固——干饭无惧。</div>
             <div class="action-group">
                 <button class="btn restart-btn" id="retakeFromResultBtn" style="flex:1;"><i class="fas fa-undo-alt"></i> 重新探索</button>
@@ -321,7 +358,7 @@
         </div>
     </div>
     <div class="footer-note">
-        <i class="fas fa-utensils"></i> 每道题都是肠道的一面镜子 · 请凭第一直觉选择
+        <i class="fas fa-utensils"></i> 每道题5个选项，分数越高越倾向左侧特质
     </div>
 </div>
 
@@ -329,39 +366,247 @@
     (function(){
         "use strict";
 
-        // ---------- 肠格题库 (20题，维度: 耐受度(G/S) 1-5，营养供给(A/N) 6-10，节律(T/U) 11-15，屏障(I/D) 16-20) ----------
-        const questions = [
-            // 维度1：耐受度 G vs S (5题)
-            { dimension: '耐受度', text: '冷热混吃（冰可乐配火锅）、爆辣重油后，你的肚子通常会？', optionA: '基本没反应，钢铁肠胃', optionB: '立刻腹痛/腹泻，马上找厕所', scoreA: 'G', scoreB: 'S' },
-            { dimension: '耐受度', text: '跨省出差或旅行，换水土时你的肠道：', optionA: '极少不适，快速适应', optionB: '极易水土不服，闹肚子', scoreA: 'G', scoreB: 'S' },
-            { dimension: '耐受度', text: '隔夜菜复热/猎奇尝鲜（如生腌、折耳根）之后：', optionA: '照常没事，肠胃耐造', optionB: '大概率胀气腹泻', scoreA: 'G', scoreB: 'S' },
-            { dimension: '耐受度', text: '情绪紧张、焦虑时，肠道会跟着闹脾气吗？', optionA: '基本不影响，稳如老狗', optionB: '立刻腹痛/想跑厕所', scoreA: 'G', scoreB: 'S' },
-            { dimension: '耐受度', text: '饥一顿饱一顿，或应酬连轴喝酒后：', optionA: '短暂不适，很快恢复', optionB: '肠道立刻翻车，难受好几天', scoreA: 'G', scoreB: 'S' },
-            // 维度2：营养供给 A vs N (5题)
-            { dimension: '营养供给', text: '日常饮食中，你的主食和蔬菜情况？', optionA: '精米白面/外卖为主，蔬菜少', optionB: '粗细搭配，足量深色蔬菜菌菇', scoreA: 'A', scoreB: 'N' },
-            { dimension: '营养供给', text: '粗粮、杂豆、燕麦、浆果等富含膳食纤维的食物：', optionA: '很少吃，想不起来', optionB: '刻意保证，每天都有', scoreA: 'A', scoreB: 'N' },
-            { dimension: '营养供给', text: '你更符合以下哪种？', optionA: '常吃零食/预制菜/代餐，添加剂多', optionB: '天然食材为主，少加工', scoreA: 'A', scoreB: 'N' },
-            { dimension: '营养供给', text: '奶茶甜品、大鱼大肉的频率：', optionA: '高频，快乐源泉', optionB: '偶尔，整体均衡', scoreA: 'A', scoreB: 'N' },
-            { dimension: '营养供给', text: '如果停掉益生菌/补剂，你的肠道感觉：', optionA: '可能会变差，依赖补剂', optionB: '依然稳定，饮食底子好', scoreA: 'A', scoreB: 'N' },
-            // 维度3：节律 T vs U (5题)
-            { dimension: '节律', text: '排便习惯最接近：', optionA: '每天固定时段，顺畅不费力', optionB: '毫无规律，便秘腹泻交替', scoreA: 'T', scoreB: 'U' },
-            { dimension: '节律', text: '饭后胀气、小腹闷堵、肠鸣的情况：', optionA: '几乎没有，很安稳', optionB: '频繁出现，难受', scoreA: 'T', scoreB: 'U' },
-            { dimension: '节律', text: '熬夜或饮食放纵后，排便节律多久恢复？', optionA: '1-2天自行恢复', optionB: '紊乱持续很久，甚至需药物', scoreA: 'T', scoreB: 'U' },
-            { dimension: '节律', text: '是否经常有排便不尽感、粘马桶？', optionA: '很少，成形利落', optionB: '经常，黏腻冲不净', scoreA: 'T', scoreB: 'U' },
-            { dimension: '节律', text: '久坐/憋便后，肠道反应：', optionA: '影响不大，很快调整', optionB: '立刻便秘或胀气加重', scoreA: 'T', scoreB: 'U' },
-            // 维度4：屏障完整度 I vs D (5题)
-            { dimension: '屏障', text: '近半年是否用过抗生素？', optionA: '没有，或极少', optionB: '用过，或经常使用', scoreA: 'I', scoreB: 'D' },
-            { dimension: '屏障', text: '熬夜、昼夜颠倒的频率：', optionA: '作息规律，很少熬夜', optionB: '长期熬夜/倒班，睡眠差', scoreA: 'I', scoreB: 'D' },
-            { dimension: '屏障', text: '饮酒习惯：', optionA: '不喝或偶尔小酌', optionB: '频繁应酬/酗酒', scoreA: 'I', scoreB: 'D' },
-            { dimension: '屏障', text: '长期压力、焦虑内耗情况：', optionA: '情绪平稳，能自我调节', optionB: '高压内耗，持续焦虑', scoreA: 'I', scoreB: 'D' },
-            { dimension: '屏障', text: '皮肤状态、免疫力、过敏情况？', optionA: '稳定，不易过敏/爆痘', optionB: '暗沉爆痘，易过敏/乏力', scoreA: 'I', scoreB: 'D' }
+        // ---------- 维度配置 ----------
+        const dimensions = [
+            { name: '耐受度', left: 'G', right: 'S', leftName: '强韧耐造', rightName: '娇嫩敏感' },
+            { name: '营养供给', left: 'A', right: 'N', leftName: '外补依赖', rightName: '内源自给' },
+            { name: '节律', left: 'T', right: 'U', leftName: '规律顺畅', rightName: '节律紊乱' },
+            { name: '屏障', left: 'I', right: 'D', leftName: '稳固完整', rightName: '屏障受损' }
         ];
 
-        // ---------- 16型肠格库 (根据文档整理) ----------
+        // ---------- 肠格题库 (20题，每题5个选项，1-5分) ----------
+        const questions = [
+            // 维度1：耐受度 (5题) - 高分倾向G，低分倾向S
+            { 
+                dimension: 0, 
+                text: '吃火锅、冰饮、重油外卖后，你的肠道状态是？',
+                options: [
+                    { text: '每次吃完都会腹痛、腹泻、胀气，非常难受', score: 1 },
+                    { text: '多数时候吃完会肠胃不舒服，出现胀气、腹痛', score: 2 },
+                    { text: '偶尔吃完会有轻微肠胃不适，很快就能缓解', score: 3 },
+                    { text: '很少因为这类饮食出现肠胃不适，基本不受影响', score: 4 },
+                    { text: '吃完完全没反应，肠道状态不受任何影响', score: 5 }
+                ]
+            },
+            { 
+                dimension: 0, 
+                text: '跨省出差、旅行或换季时，你的肠道适应能力？',
+                options: [
+                    { text: '极易水土不服，每次都闹肚子、胀气', score: 1 },
+                    { text: '经常出现不适，需要几天才能适应', score: 2 },
+                    { text: '偶尔会有轻微反应，但很快恢复正常', score: 3 },
+                    { text: '很少出现水土不服，适应能力较强', score: 4 },
+                    { text: '从不水土不服，去哪吃啥都没问题', score: 5 }
+                ]
+            },
+            { 
+                dimension: 0, 
+                text: '吃隔夜菜、生腌、猎奇食材后，你的肠道反应？',
+                options: [
+                    { text: '立刻腹痛腹泻，完全碰不得', score: 1 },
+                    { text: '多数时候会不舒服，需要谨慎', score: 2 },
+                    { text: '偶尔会有反应，但不太严重', score: 3 },
+                    { text: '基本没事，偶尔轻微不适', score: 4 },
+                    { text: '完全没反应，铁胃无疑', score: 5 }
+                ]
+            },
+            { 
+                dimension: 0, 
+                text: '情绪紧张、焦虑、压力大时，肠道会跟着闹脾气吗？',
+                options: [
+                    { text: '每次情绪波动都会腹痛、想跑厕所', score: 1 },
+                    { text: '经常因为情绪出现肠道不适', score: 2 },
+                    { text: '偶尔会有反应，但不算严重', score: 3 },
+                    { text: '很少受影响，肠道比较稳定', score: 4 },
+                    { text: '完全不受情绪影响，肠道独立自主', score: 5 }
+                ]
+            },
+            { 
+                dimension: 0, 
+                text: '饥一顿饱一顿、应酬连轴喝酒后，肠道状态？',
+                options: [
+                    { text: '立刻翻车，腹泻腹痛好几天', score: 1 },
+                    { text: '经常出问题，需要小心呵护', score: 2 },
+                    { text: '偶尔不适，但能接受', score: 3 },
+                    { text: '短暂不适，很快恢复', score: 4 },
+                    { text: '完全没事，耐造能力一流', score: 5 }
+                ]
+            },
+            // 维度2：营养供给 (5题) - 高分倾向A，低分倾向N
+            { 
+                dimension: 1, 
+                text: '你的日常主食和蔬菜摄入情况？',
+                options: [
+                    { text: '几乎全是精米白面/外卖，蔬菜很少', score: 5 },
+                    { text: '以精加工为主，偶尔吃些蔬菜', score: 4 },
+                    { text: '精粗各半，蔬菜时多时少', score: 3 },
+                    { text: '有意识粗细搭配，蔬菜基本够', score: 2 },
+                    { text: '全谷物杂豆充足，深色蔬菜每天必备', score: 1 }
+                ]
+            },
+            { 
+                dimension: 1, 
+                text: '粗粮、燕麦、菌菇、浆果等富含膳食纤维的食物？',
+                options: [
+                    { text: '几乎不吃，想不起来', score: 5 },
+                    { text: '很少吃，偶尔才碰', score: 4 },
+                    { text: '有时吃，但不规律', score: 3 },
+                    { text: '经常吃，有意识补充', score: 2 },
+                    { text: '每天刻意保证，从不间断', score: 1 }
+                ]
+            },
+            { 
+                dimension: 1, 
+                text: '你的饮食更符合以下哪种？',
+                options: [
+                    { text: '常吃零食/预制菜/代餐，添加剂多', score: 5 },
+                    { text: '外卖为主，偶尔自己做', score: 4 },
+                    { text: '外卖和自制各半', score: 3 },
+                    { text: '以自制为主，少加工', score: 2 },
+                    { text: '天然食材为主，几乎无添加剂', score: 1 }
+                ]
+            },
+            { 
+                dimension: 1, 
+                text: '奶茶甜品、大鱼大肉、重油重盐的频率？',
+                options: [
+                    { text: '天天如此，快乐源泉', score: 5 },
+                    { text: '经常吃，每周好几次', score: 4 },
+                    { text: '偶尔放纵，不算频繁', score: 3 },
+                    { text: '比较少，注意控制', score: 2 },
+                    { text: '极少，整体清淡均衡', score: 1 }
+                ]
+            },
+            { 
+                dimension: 1, 
+                text: '如果停掉益生菌/补剂/酵素，你的肠道会？',
+                options: [
+                    { text: '立刻变差，非常依赖补剂', score: 5 },
+                    { text: '会明显变差，不太敢停', score: 4 },
+                    { text: '可能有些影响，但不确定', score: 3 },
+                    { text: '影响不大，偶尔才吃', score: 2 },
+                    { text: '从不依赖补剂，饮食底子好', score: 1 }
+                ]
+            },
+            // 维度3：节律 (5题) - 高分倾向T，低分倾向U
+            { 
+                dimension: 2, 
+                text: '你的排便习惯最接近？',
+                options: [
+                    { text: '毫无规律，便秘腹泻交替，完全看运气', score: 1 },
+                    { text: '经常紊乱，时好时坏', score: 2 },
+                    { text: '基本有规律，但容易被打破', score: 3 },
+                    { text: '比较规律，偶尔波动', score: 4 },
+                    { text: '每天固定时段，顺畅不费力', score: 5 }
+                ]
+            },
+            { 
+                dimension: 2, 
+                text: '饭后胀气、小腹闷堵、肠鸣的情况？',
+                options: [
+                    { text: '每顿饭后都难受，频繁胀气肠鸣', score: 1 },
+                    { text: '经常出现，挺困扰的', score: 2 },
+                    { text: '偶尔会有，不算严重', score: 3 },
+                    { text: '很少出现，基本安稳', score: 4 },
+                    { text: '几乎没有，消化顺畅', score: 5 }
+                ]
+            },
+            { 
+                dimension: 2, 
+                text: '熬夜或饮食放纵后，排便节律多久恢复？',
+                options: [
+                    { text: '紊乱持续很久，甚至需要药物', score: 1 },
+                    { text: '需要好几天才能调回来', score: 2 },
+                    { text: '2-3天能恢复', score: 3 },
+                    { text: '1-2天自行恢复', score: 4 },
+                    { text: '几乎不受影响，当天就正常', score: 5 }
+                ]
+            },
+            { 
+                dimension: 2, 
+                text: '排便不尽感、粘马桶的情况？',
+                options: [
+                    { text: '每次都这样，黏腻冲不净', score: 1 },
+                    { text: '经常出现，挺烦人的', score: 2 },
+                    { text: '偶尔会有', score: 3 },
+                    { text: '很少，基本成形利落', score: 4 },
+                    { text: '从不，完美顺畅', score: 5 }
+                ]
+            },
+            { 
+                dimension: 2, 
+                text: '久坐、憋便后，肠道反应？',
+                options: [
+                    { text: '立刻便秘或胀气加重，非常敏感', score: 1 },
+                    { text: '经常因此出现不适', score: 2 },
+                    { text: '偶尔会受影响', score: 3 },
+                    { text: '影响不大，很快调整', score: 4 },
+                    { text: '完全不受影响', score: 5 }
+                ]
+            },
+            // 维度4：屏障 (5题) - 高分倾向I，低分倾向D
+            { 
+                dimension: 3, 
+                text: '近半年抗生素使用情况？',
+                options: [
+                    { text: '多次使用，或长期服用', score: 1 },
+                    { text: '用过1-2次', score: 2 },
+                    { text: '用过1次，短期', score: 3 },
+                    { text: '几乎没用过', score: 4 },
+                    { text: '完全没有，近一年都没用过', score: 5 }
+                ]
+            },
+            { 
+                dimension: 3, 
+                text: '熬夜、昼夜颠倒的频率？',
+                options: [
+                    { text: '长期熬夜/倒班，睡眠严重不足', score: 1 },
+                    { text: '经常熬夜，一周好几次', score: 2 },
+                    { text: '偶尔熬夜，不算频繁', score: 3 },
+                    { text: '很少熬夜，作息较规律', score: 4 },
+                    { text: '作息规律，从不熬夜', score: 5 }
+                ]
+            },
+            { 
+                dimension: 3, 
+                text: '饮酒习惯？',
+                options: [
+                    { text: '频繁应酬/酗酒，顿顿不离酒', score: 1 },
+                    { text: '经常喝，每周好几次', score: 2 },
+                    { text: '偶尔小酌，社交场合才喝', score: 3 },
+                    { text: '很少喝，几乎不碰', score: 4 },
+                    { text: '完全不喝酒', score: 5 }
+                ]
+            },
+            { 
+                dimension: 3, 
+                text: '长期压力、焦虑内耗情况？',
+                options: [
+                    { text: '高压内耗，持续焦虑抑郁', score: 1 },
+                    { text: '经常感到压力大，情绪紧张', score: 2 },
+                    { text: '有时会有压力，但能调节', score: 3 },
+                    { text: '偶尔有压力，整体平稳', score: 4 },
+                    { text: '情绪稳定，心态平和', score: 5 }
+                ]
+            },
+            { 
+                dimension: 3, 
+                text: '皮肤状态、免疫力、过敏情况？',
+                options: [
+                    { text: '暗沉爆痘，易过敏/感染，免疫力差', score: 1 },
+                    { text: '经常有皮肤问题，容易生病', score: 2 },
+                    { text: '时好时坏，不太稳定', score: 3 },
+                    { text: '基本稳定，偶尔小问题', score: 4 },
+                    { text: '皮肤好，免疫力强，很少过敏', score: 5 }
+                ]
+            }
+        ];
+
+        // ---------- 16型肠格库 ----------
         const typeDetails = {
             "GNTI": { nickname: "无Bug玩家", desc: "强韧耐受＋内源自给＋规律顺畅＋屏障完整。肠道状态堪称完美，冷热混吃、换环境几乎无不适，有益菌主导，黏膜屏障稳固，免疫代谢在线。" },
-            "GNTD": { nickname: "伪装者", desc: "饮食健康、排便顺畅，但屏障已受损。表面自信，却忽略熬夜/压力/抗生素的隐患，可能出现乏力爆痘，但仍坚信“我肠道很好”。" },
-            "GNUI": { nickname: "忍者神龟", desc: "耐受好、营养足、屏障佳，但节律紊乱。久坐憋便、饮水少，肠道不蠕动，常常便秘胀气，明明硬件很好，却卡在“下水道”。" },
+            "GNTD": { nickname: "伪装者", desc: "饮食健康、排便顺畅，但屏障已受损。表面自信，却忽略熬夜/压力/抗生素的隐患，可能出现乏力爆痘，但仍坚信"我肠道很好"。" },
+            "GNUI": { nickname: "忍者神龟", desc: "耐受好、营养足、屏障佳，但节律紊乱。久坐憋便、饮水少，肠道不蠕动，常常便秘胀气，明明硬件很好，却卡在"下水道"。" },
             "GNUD": { nickname: "人形陀螺/高压锅", desc: "耐受、营养不错，但节律紊乱＋屏障受损。工位一坐一天，熬夜加班、应酬喝酒、滥用抗生素，KPI压力拉满，肠道长期高压。" },
             "GATI": { nickname: "天选干饭人", desc: "耐受强、外补依赖、节律顺、屏障好。虽然常吃外卖/补剂，但肠道依然抗造，排便顺畅。又吃外卖又吃补剂，你这辈子有了！" },
             "GATD": { nickname: "小强COSER", desc: "表面耐受、排便顺畅，实则外补依赖＋屏障受损。假性健康，神经麻木，硬装没事，但内里已经开始透支。" },
@@ -371,7 +616,7 @@
             "SNTD": { nickname: "自律二极管", desc: "敏感肠，但营养/节律自律；然而熬夜酗酒导致屏障受损。一边极致自律饮食，一边放纵伤害，肠道时好时坏。" },
             "SNUI": { nickname: "无效内卷人/内耗之王", desc: "敏感肠，营养好、节律乱、屏障好。饮食作息比谁都懂，却连基本的排便自由都没有，被腹泻和便秘反复折磨，养肠功课全白费。" },
             "SNUD": { nickname: "被鞭策的驴", desc: "肠道敏感所以饮食健康，但其他方向无限放纵：熬夜酗酒、久坐憋便，屏障受损＋节律紊乱。一边自律一边作死。" },
-            "SATI": { nickname: "宣示者 FLAG", desc: "敏感＋外补依赖＋节律顺＋屏障好。每次大吃都肚子疼，但还要大吃。别人放屁是“噗”，你放屁是“吃完这顿就不吃了”。" },
+            "SATI": { nickname: "宣示者 FLAG", desc: "敏感＋外补依赖＋节律顺＋屏障好。每次大吃都肚子疼，但还要大吃。别人放屁是"噗"，你放屁是"吃完这顿就不吃了"。" },
             "SATD": { nickname: "摆烂人", desc: "敏感＋外补依赖＋节律顺＋屏障受损。肚子痛吃补剂，熬夜酗酒吃补剂，只要能拉就行，完全摆烂。" },
             "SAUI": { nickname: "休息者", desc: "敏感＋外补依赖＋节律紊乱＋屏障好。不好好吃饭、不按时上厕所，靠补剂活着，但身体还行，大概时间都用来休息了。" },
             "SAUD": { nickname: "瓷娃娃", desc: "敏感＋外补依赖＋节律紊乱＋屏障受损。啥啥都不行选手，肠道全线脆弱，一碰就碎。" }
@@ -379,7 +624,7 @@
 
         // 状态
         let currentIndex = 0;
-        let answers = new Array(questions.length).fill(null);
+        let answers = new Array(questions.length).fill(null); // 存储分数1-5
         let testCompleted = false;
 
         // DOM
@@ -387,6 +632,8 @@
         const resultSection = document.getElementById('resultSection');
         const questionText = document.getElementById('questionText');
         const questionNumLabel = document.getElementById('questionNumLabel');
+        const dimensionName = document.getElementById('dimensionName');
+        const dimensionRange = document.getElementById('dimensionRange');
         const optionsDiv = document.getElementById('optionsContainer');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -398,6 +645,7 @@
         const resultNickname = document.getElementById('resultNickname');
         const typeDescription = document.getElementById('typeDescription');
         const dimensionBars = document.getElementById('dimensionBars');
+        const dimensionScores = document.getElementById('dimensionScores');
 
         function updateProgress() {
             const answered = answers.filter(a => a !== null).length;
@@ -408,29 +656,38 @@
 
         function renderQuestion() {
             const q = questions[currentIndex];
+            const dim = dimensions[q.dimension];
+            
             questionText.innerText = q.text;
-            questionNumLabel.innerText = `第 ${currentIndex+1} 题 · ${q.dimension}`;
-            const selected = answers[currentIndex];
-            optionsDiv.innerHTML = `
-                <div class="option-btn ${selected === q.scoreA ? 'selected' : ''}" data-opt="A">
-                    <i class="fas fa-circle${selected === q.scoreA ? '' : '-thin'}"></i>
-                    <span>${q.optionA}</span>
-                </div>
-                <div class="option-btn ${selected === q.scoreB ? 'selected' : ''}" data-opt="B">
-                    <i class="fas fa-circle${selected === q.scoreB ? '' : '-thin'}"></i>
-                    <span>${q.optionB}</span>
-                </div>
-            `;
+            questionNumLabel.innerText = `第 ${currentIndex+1} 题`;
+            dimensionName.innerText = dim.name;
+            dimensionRange.innerText = `${dim.left} (强) ⇄ ${dim.right} (弱)`;
+            
+            const selectedScore = answers[currentIndex];
+            
+            let html = '';
+            q.options.forEach((opt, idx) => {
+                const score = opt.score;
+                const isSelected = (selectedScore === score);
+                html += `
+                    <div class="option-btn ${isSelected ? 'selected' : ''}" data-score="${score}">
+                        <span class="option-score">${score}</span>
+                        <span class="option-text">${opt.text}</span>
+                    </div>
+                `;
+            });
+            optionsDiv.innerHTML = html;
+            
             document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const opt = btn.dataset.opt;
-                    const val = opt === 'A' ? q.scoreA : q.scoreB;
-                    answers[currentIndex] = val;
+                    const score = parseInt(btn.dataset.score);
+                    answers[currentIndex] = score;
                     renderQuestion();
                     updateProgress();
                     updateNavButtons();
                 });
             });
+            
             updateNavButtons();
             updateProgress();
         }
@@ -449,8 +706,9 @@
         function goToPrev() {
             if (currentIndex > 0) { currentIndex--; renderQuestion(); }
         }
+        
         function goToNext() {
-            if (!answers[currentIndex]) return;
+            if (answers[currentIndex] === null) return;
             if (currentIndex === questions.length - 1) {
                 finishTest();
             } else {
@@ -468,48 +726,88 @@
             }
             testCompleted = true;
             
-            // 统计维度
-            let g=0, s=0, a=0, n=0, t=0, u=0, i=0, d=0;
-            answers.forEach((ans, idx) => {
+            // 计算各维度总分 (每题1-5分，每个维度5题，总分5-25分)
+            const scores = [0, 0, 0, 0]; // G/A/T/I 倾向分数
+            const counts = [0, 0, 0, 0]; // 各维度题目计数
+            
+            answers.forEach((score, idx) => {
                 const dim = questions[idx].dimension;
-                if (dim === '耐受度') ans === 'G' ? g++ : s++;
-                else if (dim === '营养供给') ans === 'A' ? a++ : n++;
-                else if (dim === '节律') ans === 'T' ? t++ : u++;
-                else if (dim === '屏障') ans === 'I' ? i++ : d++;
+                scores[dim] += score;
+                counts[dim]++;
             });
             
-            const typeCode = (g>=s?'G':'S') + (a>=n?'A':'N') + (t>=u?'T':'U') + (i>=d?'I':'D');
+            // 判定倾向：> 12.5 为左侧，≤ 12.5 为右侧
+            const typeChars = [];
+            for (let i = 0; i < 4; i++) {
+                const avgScore = scores[i]; // 总分
+                const threshold = 12.5; // 每维度5题，满分25分，中位数12.5
+                if (avgScore > threshold) {
+                    typeChars.push(dimensions[i].left);
+                } else {
+                    typeChars.push(dimensions[i].right);
+                }
+            }
+            
+            const typeCode = typeChars.join('');
             const detail = typeDetails[typeCode] || { nickname: "未知肠格", desc: "独特而复杂的肠道人格。" };
             
             resultTypeCode.innerText = typeCode;
             resultNickname.innerText = detail.nickname;
             typeDescription.innerText = detail.desc;
-            renderDimensionBars(g,s, a,n, t,u, i,d);
+            
+            renderDimensionBars(scores);
+            renderDimensionScores(scores);
             
             testSection.classList.add('hidden');
             resultSection.classList.remove('hidden');
         }
 
-        function renderDimensionBars(g,s, a,n, t,u, i,d) {
-            const createBar = (leftL, rightL, leftV, rightV) => {
-                const total = leftV + rightV;
-                const leftP = total===0 ? 50 : (leftV/total)*100;
+        function renderDimensionBars(scores) {
+            const createBar = (dimIdx, leftLabel, rightLabel, score) => {
+                const maxScore = 25; // 5题×5分
+                const leftPercent = (score / maxScore) * 100;
+                const rightPercent = 100 - leftPercent;
                 return `
                     <div class="dimension-item">
-                        <div class="dimension-label"><span>${leftL} 倾向</span><span>${rightL} 倾向</span></div>
+                        <div class="dimension-label">
+                            <span>${leftLabel} (${score}分)</span>
+                            <span>${rightLabel} (${maxScore - score}分)</span>
+                        </div>
                         <div class="bar-container">
-                            <span class="bar-left">${leftL}</span>
-                            <div class="bar-bg"><div class="bar-fill-left" style="width:${leftP}%;"></div><div class="bar-fill-right" style="width:${100-leftP}%;"></div></div>
-                            <span class="bar-right">${rightL}</span>
+                            <span class="bar-left">${dimensions[dimIdx].left}</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill-left" style="width:${leftPercent}%;"></div>
+                                <div class="bar-fill-right" style="width:${rightPercent}%;"></div>
+                            </div>
+                            <span class="bar-right">${dimensions[dimIdx].right}</span>
                         </div>
                     </div>
                 `;
             };
+            
             dimensionBars.innerHTML = 
-                createBar('G 强韧', 'S 敏感', g, s) +
-                createBar('A 外补', 'N 自给', a, n) +
-                createBar('T 规律', 'U 紊乱', t, u) +
-                createBar('I 稳固', 'D 受损', i, d);
+                createBar(0, 'G 强韧耐造', 'S 娇嫩敏感', scores[0]) +
+                createBar(1, 'A 外补依赖', 'N 内源自给', scores[1]) +
+                createBar(2, 'T 规律顺畅', 'U 节律紊乱', scores[2]) +
+                createBar(3, 'I 稳固完整', 'D 屏障受损', scores[3]);
+        }
+
+        function renderDimensionScores(scores) {
+            const dimNames = ['耐受度', '营养供给', '节律', '屏障'];
+            const leftNames = ['强韧(G)', '外补(A)', '规律(T)', '稳固(I)'];
+            const rightNames = ['敏感(S)', '自给(N)', '紊乱(U)', '受损(D)'];
+            
+            let html = '<div style="display:grid; gap:8px;">';
+            for (let i = 0; i < 4; i++) {
+                const score = scores[i];
+                const tendency = score > 12.5 ? leftNames[i] : rightNames[i];
+                html += `<div style="display:flex; justify-content:space-between;">
+                    <span>${dimNames[i]}: ${score}/25分</span>
+                    <span style="font-weight:600;">→ ${tendency}</span>
+                </div>`;
+            }
+            html += '</div>';
+            dimensionScores.innerHTML = html;
         }
 
         function resetTest() {
