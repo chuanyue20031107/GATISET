@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>🍲 肠格测试 · 十六型肠道人格</title>
+    <title>🍲 肠格·罗盘 · 十六型肠道人格测试</title>
     <!-- 字体与图标 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -17,147 +17,143 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #fbf5e8 0%, #f3e9d2 100%);
+            background: linear-gradient(145deg, #fcf6ed 0%, #f2e5d4 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
             color: #2e241b;
         }
         .app-container {
             width: 100%;
-            max-width: 680px;
-            background: rgba(255, 250, 240, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 40px;
-            box-shadow: 0 20px 40px -8px rgba(90, 50, 30, 0.15);
-            padding: 28px 24px 32px;
-            border: 1px solid #f0dbc0;
+            max-width: 720px;
+            background: rgba(255, 251, 245, 0.9);
+            backdrop-filter: blur(14px);
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -12px rgba(70, 40, 20, 0.25);
+            padding: 28px 26px 36px;
+            border: 1px solid #f3e4d0;
         }
         h1 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 650;
-            font-size: 2.1rem;
-            letter-spacing: -0.02em;
-            color: #4a3727;
-            margin-bottom: 4px;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.3px;
+            color: #4a2f1e;
         }
         .subhead {
             font-size: 0.95rem;
-            color: #7b5e47;
-            margin-bottom: 24px;
+            color: #8b694c;
+            margin-bottom: 28px;
             font-weight: 400;
-            border-left: 5px solid #c9a87c;
+            border-left: 4px solid #dbbc97;
             padding-left: 16px;
         }
         .progress-area {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .progress-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
-            font-size: 0.9rem;
             font-weight: 500;
-            color: #5e4533;
+            font-size: 0.85rem;
+            color: #7b5a3c;
         }
         .progress-bar-bg {
             height: 10px;
-            background: #e7d9c5;
-            border-radius: 40px;
+            background: #e7d7c2;
+            border-radius: 30px;
             overflow: hidden;
         }
         .progress-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #b48c5c, #dbb486);
-            border-radius: 40px;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #b48454, #e0b280);
+            border-radius: 30px;
+            transition: width 0.25s ease;
         }
         .test-card {
-            background: #fffcf5;
-            border-radius: 32px;
-            padding: 28px 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 12px 24px -8px rgba(70, 40, 20, 0.08);
-            border: 1px solid #efe1cf;
+            background: #fffaf2;
+            border-radius: 36px;
+            padding: 28px 26px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 28px -8px rgba(70, 40, 15, 0.08);
+            border: 1px solid #f0e0ca;
         }
         .dimension-indicator {
             display: inline-block;
-            background: #efe1cf;
-            padding: 4px 12px;
-            border-radius: 20px;
+            background: #e9d9c6;
+            padding: 6px 14px;
+            border-radius: 40px;
             font-size: 0.8rem;
-            margin-bottom: 12px;
-            color: #5e3f28;
-        }
-        .dimension-indicator i {
-            margin-right: 6px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #5a3c22;
         }
         .question-number {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            font-weight: 600;
-            color: #a77b50;
+            font-weight: 700;
+            color: #b3885a;
             margin-bottom: 14px;
         }
         .question-text {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 28px;
-            color: #342419;
+            line-height: 1.35;
+            margin-bottom: 30px;
+            color: #2f2217;
         }
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .option-btn {
-            background: #faf3e9;
-            border: 1.8px solid #e0cfba;
-            border-radius: 20px;
-            padding: 16px 18px;
+            background: #fdf5ea;
+            border: 1.8px solid #e2cfb6;
+            border-radius: 28px;
+            padding: 14px 20px;
             text-align: left;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            color: #3f2e1f;
-            transition: all 0.15s;
+            color: #3f2d1d;
+            transition: all 0.18s;
             cursor: pointer;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 14px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         .option-btn:hover {
-            background: #efe0cf;
-            border-color: #c4a176;
+            background: #f6eadb;
+            border-color: #c8aa83;
         }
         .option-btn.selected {
-            background: #e7d2bc;
-            border-color: #a47148;
-            box-shadow: 0 6px 12px rgba(160, 100, 60, 0.1);
+            background: #eddbbc;
+            border-color: #b27d4c;
+            box-shadow: 0 6px 12px rgba(140, 85, 40, 0.1);
         }
         .option-score {
             display: inline-block;
             min-width: 32px;
             height: 32px;
-            background: #d4b48c;
+            background: #cfb692;
             color: white;
-            border-radius: 16px;
+            border-radius: 30px;
             text-align: center;
             line-height: 32px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             flex-shrink: 0;
         }
         .option-btn.selected .option-score {
-            background: #8b5e3c;
+            background: #956a41;
         }
         .option-text {
             flex: 1;
@@ -170,30 +166,29 @@
             margin-top: 8px;
         }
         .btn {
-            background: rgba(255,250,240,0.7);
-            border: 1.8px solid #dac2a8;
-            padding: 14px 22px;
+            background: rgba(255,250,240,0.8);
+            border: 1.5px solid #dac09f;
+            padding: 14px 16px;
             border-radius: 60px;
             font-weight: 600;
-            font-size: 1rem;
-            color: #4e3824;
+            font-size: 0.95rem;
+            color: #543b26;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             transition: 0.2s;
-            backdrop-filter: blur(5px);
             flex: 1;
         }
         .btn-primary {
-            background: #b07d4b;
-            border-color: #b07d4b;
+            background: #c08c5c;
+            border-color: #c08c5c;
             color: white;
-            box-shadow: 0 8px 18px -6px #c9a87c;
+            box-shadow: 0 8px 18px -8px #c9a16e;
         }
         .btn-primary:hover {
-            background: #9a6840;
+            background: #a57248;
         }
         .btn:disabled {
             opacity: 0.4;
@@ -201,42 +196,60 @@
         }
         .restart-btn {
             flex: 0.4;
-            background: transparent;
+            background: #f2e8db;
         }
         .result-card {
             background: #fffcf5;
-            border-radius: 36px;
-            padding: 32px 24px;
+            border-radius: 42px;
+            padding: 32px 26px;
             text-align: center;
-            box-shadow: 0 20px 30px -8px rgba(80, 50, 30, 0.12);
-            border: 1px solid #ebdaca;
+            box-shadow: 0 20px 35px -12px rgba(70, 40, 20, 0.12);
+            border: 1px solid #eeddc8;
         }
         .result-type {
-            font-size: 4.2rem;
-            font-weight: 750;
-            letter-spacing: 6px;
-            color: #5a3f2b;
-            margin: 8px 0 4px;
+            font-size: 3.6rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: #5a3a22;
+            margin: 6px 0 2px;
         }
         .type-nickname {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #7b5a3e;
-            margin-bottom: 24px;
+            font-size: 1.6rem;
+            font-weight: 650;
+            color: #9e724b;
+            margin-bottom: 18px;
+        }
+        .illustration-placeholder {
+            background: #efe3d2;
+            border-radius: 32px;
+            padding: 22px 12px;
+            margin: 18px 0 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #cfb388;
+            color: #937a59;
+            font-size: 0.9rem;
+            gap: 10px;
+        }
+        .illustration-placeholder i {
+            font-size: 3.2rem;
+            opacity: 0.7;
         }
         .dimension-bars {
-            margin: 28px 0 20px;
+            margin: 28px 0 18px;
             text-align: left;
         }
         .dimension-item {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .dimension-label {
             display: flex;
             justify-content: space-between;
             font-weight: 500;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
         }
         .bar-container {
             display: flex;
@@ -244,46 +257,47 @@
             gap: 8px;
         }
         .bar-left, .bar-right {
-            font-weight: 600;
+            font-weight: 700;
             width: 32px;
-            color: #5e3f28;
+            font-size: 0.8rem;
+            color: #6c4d33;
         }
         .bar-bg {
             flex: 1;
             height: 12px;
-            background: #e4d3be;
-            border-radius: 40px;
+            background: #e1cfb6;
+            border-radius: 30px;
             overflow: hidden;
             display: flex;
         }
         .bar-fill-left {
-            background: #a47148;
+            background: #b47b4a;
             height: 100%;
             width: 50%;
-            border-radius: 40px 0 0 40px;
+            border-radius: 30px 0 0 30px;
         }
         .bar-fill-right {
-            background: #dbb486;
+            background: #e0b585;
             height: 100%;
             width: 50%;
-            border-radius: 0 40px 40px 0;
+            border-radius: 0 30px 30px 0;
         }
         .description {
-            background: #f6ede1;
-            padding: 22px 18px;
-            border-radius: 24px;
-            margin: 28px 0 18px;
-            font-size: 0.98rem;
+            background: #f3e9dd;
+            padding: 20px 18px;
+            border-radius: 28px;
+            margin: 22px 0 18px;
+            font-size: 0.96rem;
             line-height: 1.55;
-            color: #312219;
+            color: #302016;
         }
         .dimension-scores {
-            margin-top: 16px;
-            padding: 12px;
-            background: #f0e6d8;
-            border-radius: 16px;
+            margin-top: 18px;
+            padding: 14px;
+            background: #f2e6d9;
+            border-radius: 20px;
             font-size: 0.85rem;
-            color: #5a3f2b;
+            color: #5c3f28;
         }
         .action-group {
             display: flex;
@@ -293,9 +307,9 @@
             display: none !important;
         }
         .footer-note {
-            margin-top: 20px;
-            font-size: 0.75rem;
-            color: #9b8269;
+            margin-top: 24px;
+            font-size: 0.7rem;
+            color: #ab8b6b;
             text-align: center;
         }
         i {
@@ -307,18 +321,18 @@
 <div class="app-container">
     <header>
         <h1>
-            <i class="fas fa-seedling" style="color:#9f7e5e;"></i> 
+            <i class="fas fa-smile-wink" style="color:#bb8b60;"></i> 
             肠格·罗盘
         </h1>
-        <div class="subhead">肠道耐受 · 营养供给 · 节律 · 屏障 — 你的十六型肠格</div>
+        <div class="subhead">肠道耐受 · 营养供给 · 排便节律 · 屏障完整 — 解锁你的肠道人格原型</div>
     </header>
 
     <!-- 测试区 -->
     <div id="testSection">
         <div class="progress-area">
             <div class="progress-header">
-                <span><i class="far fa-list-alt"></i> 肠检进度</span>
-                <span id="progressText">0 / 20</span>
+                <span><i class="far fa-clipboard"></i> 肠检进度</span>
+                <span id="progressText">0 / 16</span>
             </div>
             <div class="progress-bar-bg">
                 <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
@@ -326,12 +340,12 @@
         </div>
 
         <div class="test-card">
-            <div class="dimension-indicator" id="dimensionTag">
-                <i class="fas fa-shield-alt"></i> <span id="dimensionName">耐受度</span> 
+            <div class="dimension-indicator">
+                <i class="fas fa-shield-virus"></i> <span id="dimensionName">耐受度</span> 
                 (<span id="dimensionRange">G ⇄ S</span>)
             </div>
             <div class="question-number" id="questionNumLabel">第 1 题</div>
-            <div class="question-text" id="questionText">吃火锅、冰饮、重油外卖后，你的肠道状态是？</div>
+            <div class="question-text" id="questionText">加载中...</div>
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
@@ -345,31 +359,32 @@
     <!-- 结果区 -->
     <div id="resultSection" class="hidden">
         <div class="result-card">
-            <div style="margin-bottom: 6px;"><i class="fas fa-dna" style="color:#b48c5c;"></i> 你的肠格型号</div>
-            <div class="result-type" id="resultTypeCode">GATI</div>
-            <div class="type-nickname" id="resultNickname">天选干饭人</div>
+            <div style="margin-bottom: 6px;"><i class="fas fa-dragon"></i> 你的肠格型号</div>
+            <div class="result-type" id="resultTypeCode">GNTI</div>
+            <div class="type-nickname" id="resultNickname">六边形战士</div>
+            <!-- 图片占位区域 —— 为每种人格留出形象位置 -->
+            <div class="illustration-placeholder" id="imagePlaceholder">
+                <i class="fas fa-fill-drip"></i>
+                <span>🧑‍🎨【肠道小灵·角色形象预留】</span>
+                <span style="font-size: 12px;">✨ 专属人格插图 ✨</span>
+            </div>
             <div class="dimension-bars" id="dimensionBars"></div>
             <div class="dimension-scores" id="dimensionScores"></div>
-            <div class="description" id="typeDescription">肠道耐受、营养自给、节律顺畅、屏障稳固——干饭无惧。</div>
+            <div class="description" id="typeDescription">描述加载中...</div>
             <div class="action-group">
                 <button class="btn restart-btn" id="retakeFromResultBtn" style="flex:1;"><i class="fas fa-undo-alt"></i> 重新探索</button>
             </div>
-            <p style="margin-top: 18px; font-size:0.8rem; opacity:0.7;"><i class="far fa-comment"></i> 肠格仅供参考，严重不适请及时就医</p>
+            <p style="margin-top: 18px; font-size:0.75rem; opacity:0.7;"><i class="far fa-comment-dots"></i> 肠格测试仅供参考，严重不适请及时就医</p>
         </div>
     </div>
     <div class="footer-note">
-        <i class="fas fa-utensils"></i> 每道题5个选项，分数越高越倾向左侧特质
+        <i class="fas fa-apple-alt"></i> 根据真实饮食习惯 · 挖掘你的肠道人格原型
     </div>
 </div>
 
 <script>
     (function(){
-        "use strict";
-
-        // 调试标志
-        console.log('肠格测试初始化开始...');
-
-        // ---------- 维度配置 ----------
+        // ----------------------------- 维度定义 ---------------------------
         const dimensions = [
             { name: '耐受度', left: 'G', right: 'S', leftName: '强韧耐造', rightName: '娇嫩敏感' },
             { name: '营养供给', left: 'A', right: 'N', leftName: '外补依赖', rightName: '内源自给' },
@@ -377,370 +392,143 @@
             { name: '屏障', left: 'I', right: 'D', leftName: '稳固完整', rightName: '屏障受损' }
         ];
 
-        // ---------- 肠格题库 (20题，每题5个选项，1-5分) ----------
-        const questions = [
-            // 维度1：耐受度 (5题) - 高分倾向G，低分倾向S
-            { 
-                dimension: 0, 
-                text: '吃火锅、冰饮、重油外卖后，你的肠道状态是？',
-                options: [
-                    { text: '每次吃完都会腹痛、腹泻、胀气，非常难受', score: 1 },
-                    { text: '多数时候吃完会肠胃不舒服，出现胀气、腹痛', score: 2 },
-                    { text: '偶尔吃完会有轻微肠胃不适，很快就能缓解', score: 3 },
-                    { text: '很少因为这类饮食出现肠胃不适，基本不受影响', score: 4 },
-                    { text: '吃完完全没反应，肠道状态不受任何影响', score: 5 }
-                ]
-            },
-            { 
-                dimension: 0, 
-                text: '跨省出差、旅行或换季时，你的肠道适应能力？',
-                options: [
-                    { text: '极易水土不服，每次都闹肚子、胀气', score: 1 },
-                    { text: '经常出现不适，需要几天才能适应', score: 2 },
-                    { text: '偶尔会有轻微反应，但很快恢复正常', score: 3 },
-                    { text: '很少出现水土不服，适应能力较强', score: 4 },
-                    { text: '从不水土不服，去哪吃啥都没问题', score: 5 }
-                ]
-            },
-            { 
-                dimension: 0, 
-                text: '吃隔夜菜、生腌、猎奇食材后，你的肠道反应？',
-                options: [
-                    { text: '立刻腹痛腹泻，完全碰不得', score: 1 },
-                    { text: '多数时候会不舒服，需要谨慎', score: 2 },
-                    { text: '偶尔会有反应，但不太严重', score: 3 },
-                    { text: '基本没事，偶尔轻微不适', score: 4 },
-                    { text: '完全没反应，铁胃无疑', score: 5 }
-                ]
-            },
-            { 
-                dimension: 0, 
-                text: '情绪紧张、焦虑、压力大时，肠道会跟着闹脾气吗？',
-                options: [
-                    { text: '每次情绪波动都会腹痛、想跑厕所', score: 1 },
-                    { text: '经常因为情绪出现肠道不适', score: 2 },
-                    { text: '偶尔会有反应，但不算严重', score: 3 },
-                    { text: '很少受影响，肠道比较稳定', score: 4 },
-                    { text: '完全不受情绪影响，肠道独立自主', score: 5 }
-                ]
-            },
-            { 
-                dimension: 0, 
-                text: '饥一顿饱一顿、应酬连轴喝酒后，肠道状态？',
-                options: [
-                    { text: '立刻翻车，腹泻腹痛好几天', score: 1 },
-                    { text: '经常出问题，需要小心呵护', score: 2 },
-                    { text: '偶尔不适，但能接受', score: 3 },
-                    { text: '短暂不适，很快恢复', score: 4 },
-                    { text: '完全没事，耐造能力一流', score: 5 }
-                ]
-            },
-            // 维度2：营养供给 (5题) - 高分倾向A，低分倾向N
-            { 
-                dimension: 1, 
-                text: '你的日常主食和蔬菜摄入情况？',
-                options: [
-                    { text: '几乎全是精米白面/外卖，蔬菜很少', score: 5 },
-                    { text: '以精加工为主，偶尔吃些蔬菜', score: 4 },
-                    { text: '精粗各半，蔬菜时多时少', score: 3 },
-                    { text: '有意识粗细搭配，蔬菜基本够', score: 2 },
-                    { text: '全谷物杂豆充足，深色蔬菜每天必备', score: 1 }
-                ]
-            },
-            { 
-                dimension: 1, 
-                text: '粗粮、燕麦、菌菇、浆果等富含膳食纤维的食物？',
-                options: [
-                    { text: '几乎不吃，想不起来', score: 5 },
-                    { text: '很少吃，偶尔才碰', score: 4 },
-                    { text: '有时吃，但不规律', score: 3 },
-                    { text: '经常吃，有意识补充', score: 2 },
-                    { text: '每天刻意保证，从不间断', score: 1 }
-                ]
-            },
-            { 
-                dimension: 1, 
-                text: '你的饮食更符合以下哪种？',
-                options: [
-                    { text: '常吃零食/预制菜/代餐，添加剂多', score: 5 },
-                    { text: '外卖为主，偶尔自己做', score: 4 },
-                    { text: '外卖和自制各半', score: 3 },
-                    { text: '以自制为主，少加工', score: 2 },
-                    { text: '天然食材为主，几乎无添加剂', score: 1 }
-                ]
-            },
-            { 
-                dimension: 1, 
-                text: '奶茶甜品、大鱼大肉、重油重盐的频率？',
-                options: [
-                    { text: '天天如此，快乐源泉', score: 5 },
-                    { text: '经常吃，每周好几次', score: 4 },
-                    { text: '偶尔放纵，不算频繁', score: 3 },
-                    { text: '比较少，注意控制', score: 2 },
-                    { text: '极少，整体清淡均衡', score: 1 }
-                ]
-            },
-            { 
-                dimension: 1, 
-                text: '如果停掉益生菌/补剂/酵素，你的肠道会？',
-                options: [
-                    { text: '立刻变差，非常依赖补剂', score: 5 },
-                    { text: '会明显变差，不太敢停', score: 4 },
-                    { text: '可能有些影响，但不确定', score: 3 },
-                    { text: '影响不大，偶尔才吃', score: 2 },
-                    { text: '从不依赖补剂，饮食底子好', score: 1 }
-                ]
-            },
-            // 维度3：节律 (5题) - 高分倾向T，低分倾向U
-            { 
-                dimension: 2, 
-                text: '你的排便习惯最接近？',
-                options: [
-                    { text: '毫无规律，便秘腹泻交替，完全看运气', score: 1 },
-                    { text: '经常紊乱，时好时坏', score: 2 },
-                    { text: '基本有规律，但容易被打破', score: 3 },
-                    { text: '比较规律，偶尔波动', score: 4 },
-                    { text: '每天固定时段，顺畅不费力', score: 5 }
-                ]
-            },
-            { 
-                dimension: 2, 
-                text: '饭后胀气、小腹闷堵、肠鸣的情况？',
-                options: [
-                    { text: '每顿饭后都难受，频繁胀气肠鸣', score: 1 },
-                    { text: '经常出现，挺困扰的', score: 2 },
-                    { text: '偶尔会有，不算严重', score: 3 },
-                    { text: '很少出现，基本安稳', score: 4 },
-                    { text: '几乎没有，消化顺畅', score: 5 }
-                ]
-            },
-            { 
-                dimension: 2, 
-                text: '熬夜或饮食放纵后，排便节律多久恢复？',
-                options: [
-                    { text: '紊乱持续很久，甚至需要药物', score: 1 },
-                    { text: '需要好几天才能调回来', score: 2 },
-                    { text: '2-3天能恢复', score: 3 },
-                    { text: '1-2天自行恢复', score: 4 },
-                    { text: '几乎不受影响，当天就正常', score: 5 }
-                ]
-            },
-            { 
-                dimension: 2, 
-                text: '排便不尽感、粘马桶的情况？',
-                options: [
-                    { text: '每次都这样，黏腻冲不净', score: 1 },
-                    { text: '经常出现，挺烦人的', score: 2 },
-                    { text: '偶尔会有', score: 3 },
-                    { text: '很少，基本成形利落', score: 4 },
-                    { text: '从不，完美顺畅', score: 5 }
-                ]
-            },
-            { 
-                dimension: 2, 
-                text: '久坐、憋便后，肠道反应？',
-                options: [
-                    { text: '立刻便秘或胀气加重，非常敏感', score: 1 },
-                    { text: '经常因此出现不适', score: 2 },
-                    { text: '偶尔会受影响', score: 3 },
-                    { text: '影响不大，很快调整', score: 4 },
-                    { text: '完全不受影响', score: 5 }
-                ]
-            },
-            // 维度4：屏障 (5题) - 高分倾向I，低分倾向D
-            { 
-                dimension: 3, 
-                text: '近半年抗生素使用情况？',
-                options: [
-                    { text: '多次使用，或长期服用', score: 1 },
-                    { text: '用过1-2次', score: 2 },
-                    { text: '用过1次，短期', score: 3 },
-                    { text: '几乎没用过', score: 4 },
-                    { text: '完全没有，近一年都没用过', score: 5 }
-                ]
-            },
-            { 
-                dimension: 3, 
-                text: '熬夜、昼夜颠倒的频率？',
-                options: [
-                    { text: '长期熬夜/倒班，睡眠严重不足', score: 1 },
-                    { text: '经常熬夜，一周好几次', score: 2 },
-                    { text: '偶尔熬夜，不算频繁', score: 3 },
-                    { text: '很少熬夜，作息较规律', score: 4 },
-                    { text: '作息规律，从不熬夜', score: 5 }
-                ]
-            },
-            { 
-                dimension: 3, 
-                text: '饮酒习惯？',
-                options: [
-                    { text: '频繁应酬/酗酒，顿顿不离酒', score: 1 },
-                    { text: '经常喝，每周好几次', score: 2 },
-                    { text: '偶尔小酌，社交场合才喝', score: 3 },
-                    { text: '很少喝，几乎不碰', score: 4 },
-                    { text: '完全不喝酒', score: 5 }
-                ]
-            },
-            { 
-                dimension: 3, 
-                text: '长期压力、焦虑内耗情况？',
-                options: [
-                    { text: '高压内耗，持续焦虑抑郁', score: 1 },
-                    { text: '经常感到压力大，情绪紧张', score: 2 },
-                    { text: '有时会有压力，但能调节', score: 3 },
-                    { text: '偶尔有压力，整体平稳', score: 4 },
-                    { text: '情绪稳定，心态平和', score: 5 }
-                ]
-            },
-            { 
-                dimension: 3, 
-                text: '皮肤状态、免疫力、过敏情况？',
-                options: [
-                    { text: '暗沉爆痘，易过敏/感染，免疫力差', score: 1 },
-                    { text: '经常有皮肤问题，容易生病', score: 2 },
-                    { text: '时好时坏，不太稳定', score: 3 },
-                    { text: '基本稳定，偶尔小问题', score: 4 },
-                    { text: '皮肤好，免疫力强，很少过敏', score: 5 }
-                ]
-            }
-        ];
-
-        // ---------- 16型肠格库 ----------
-        const typeDetails = {
-            "GNTI": { nickname: "无Bug玩家", desc: "强韧耐受＋内源自给＋规律顺畅＋屏障完整。肠道状态堪称完美，冷热混吃、换环境几乎无不适，有益菌主导，黏膜屏障稳固，免疫代谢在线。" },
-            "GNTD": { nickname: "伪装者", desc: "饮食健康、排便顺畅，但屏障已受损。表面自信，却忽略熬夜/压力/抗生素的隐患，可能出现乏力爆痘，但仍坚信\"我肠道很好\"。" },
-            "GNUI": { nickname: "忍者神龟", desc: "耐受好、营养足、屏障佳，但节律紊乱。久坐憋便、饮水少，肠道不蠕动，常常便秘胀气，明明硬件很好，却卡在\"下水道\"。" },
-            "GNUD": { nickname: "人形陀螺/高压锅", desc: "耐受、营养不错，但节律紊乱＋屏障受损。工位一坐一天，熬夜加班、应酬喝酒、滥用抗生素，KPI压力拉满，肠道长期高压。" },
-            "GATI": { nickname: "天选干饭人", desc: "耐受强、外补依赖、节律顺、屏障好。虽然常吃外卖/补剂，但肠道依然抗造，排便顺畅。又吃外卖又吃补剂，你这辈子有了！" },
-            "GATD": { nickname: "小强COSER", desc: "表面耐受、排便顺畅，实则外补依赖＋屏障受损。假性健康，神经麻木，硬装没事，但内里已经开始透支。" },
-            "GAUD": { nickname: "Dead-Duck 嘴硬学家", desc: "耐受强、外补依赖、节律紊乱、屏障受损。嘴上吹嘘铁肠胃，背地便秘胀气常备泻药。陷入嘴硬→造作→加重→焦虑的恶性循环。" },
-            "GAUI": { nickname: "大便超人", desc: "耐受强、外补依赖、节律紊乱、屏障好。怎么乱吃都不拉肚子，却天天被便秘胀气折磨，干饭自由实现了，排便自由遥遥无期。" },
-            "SNTI": { nickname: "豌豆公主", desc: "肠道敏感，但营养自给、节律顺、屏障好。把所有养肠动作做到极致，却依然逃不过肠道闹脾气，一点点风吹草动就敏感。" },
-            "SNTD": { nickname: "自律二极管", desc: "敏感肠，但营养/节律自律；然而熬夜酗酒导致屏障受损。一边极致自律饮食，一边放纵伤害，肠道时好时坏。" },
-            "SNUI": { nickname: "无效内卷人/内耗之王", desc: "敏感肠，营养好、节律乱、屏障好。饮食作息比谁都懂，却连基本的排便自由都没有，被腹泻和便秘反复折磨，养肠功课全白费。" },
-            "SNUD": { nickname: "被鞭策的驴", desc: "肠道敏感所以饮食健康，但其他方向无限放纵：熬夜酗酒、久坐憋便，屏障受损＋节律紊乱。一边自律一边作死。" },
-            "SATI": { nickname: "宣示者 FLAG", desc: "敏感＋外补依赖＋节律顺＋屏障好。每次大吃都肚子疼，但还要大吃。别人放屁是\"噗\"，你放屁是\"吃完这顿就不吃了\"。" },
-            "SATD": { nickname: "摆烂人", desc: "敏感＋外补依赖＋节律顺＋屏障受损。肚子痛吃补剂，熬夜酗酒吃补剂，只要能拉就行，完全摆烂。" },
-            "SAUI": { nickname: "休息者", desc: "敏感＋外补依赖＋节律紊乱＋屏障好。不好好吃饭、不按时上厕所，靠补剂活着，但身体还行，大概时间都用来休息了。" },
-            "SAUD": { nickname: "瓷娃娃", desc: "敏感＋外补依赖＋节律紊乱＋屏障受损。啥啥都不行选手，肠道全线脆弱，一碰就碎。" }
+        // ----------------------------- 十六型肠格数据库 (基于文件内容 昵称+解释+预留图片区域) ----------
+        const typeMap = {
+            "GNTI": { nickname: "六边形战士", desc: "我是正面人物！主角！集齐 G 强韧耐造、N 内源自给、T 规律顺畅、I 稳固完整四大顶配 buff，你就是肠道界的天选主角儿！冷热混吃不翻车，跨地区出行顺顺利利，天然饮食养出活力菌群，排便丝滑不费力，黏膜屏障稳固免疫拉满。别人的肠道在渡劫，你的肠道在度假，妥妥的满级天花板，羡慕两个字已经说累了！" },
+            "GNTD": { nickname: "不粘锅", desc: "大概是昨天没休息好，反正肯定不是我肠道的问题。拥有 G 强韧耐造、N 内源自给、T 规律顺畅三大准满级优势，唯独D屏障受损悄悄拖了后腿，活成了自带十级美颜滤镜的肠道 FAKER！表面吃嘛嘛香、排便顺畅，出点小状况总以为是“大概是昨天没休息好，大概昨天着了凉”，实则熬夜、压力已经悄悄损伤了黏膜。别担心，底子够硬，只要稍微调整作息、少点内耗，分分钟重回满分状态" },
+            "GNUI": { nickname: "忍者神龟", desc: "G强韧、N自给、I屏障稳固，唯独U节律紊乱让你变成能憋能扛的熬屎意小霸王！便意总被打断，节奏变随缘模式。只要定个排便闹钟改掉憋便坏习惯，很快找回顺畅节律。" },
+            "GNUD": { nickname: "永动机", desc: "G强韧耐造、N内源自给给你奋斗底气，但U节律紊乱+D屏障受损让你停不下来。忙到憋便，KPI压力拉满，熬夜应酬，肠道默默扛下所有。奋斗同时记得给肠道放个假。" },
+            "GATI": { nickname: "天选干饭人", desc: "G强韧耐造给你干饭自由，T规律+I屏障稳固保底，A外补依赖让你美食补剂库库炫。顿顿外卖奶茶，有益菌缺粮只能靠补剂续命，记得多吃膳食纤维哦！" },
+            "GATD": { nickname: "广东双马尾", desc: "G强韧+T规律让你看起来打不死小强，耐受力强，但A外补依赖让菌群缺粮，D屏障受损让黏膜带伤工作，表面百毒不侵，肠道负重前行。" },
+            "GAUD": { nickname: "嘴硬学家", desc: "仅凭G强韧耐造就自认天选铁肠胃，实则A外补依赖+U节律紊乱+D屏障受损三重暴击，背地里便秘胀气全靠补剂。承认肠道需要呵护不丢人。" },
+            "GAUI": { nickname: "喷射战士", desc: "G强韧耐造+I屏障稳固给你不错底子，但A外补依赖使菌群失衡，U节律紊乱让排便彻底放飞。别人排便看时间，你排便看缘分，调整饮食和规律便便吧。" },
+            "SNTI": { nickname: "瓷娃娃", desc: "N内源自给+T规律+I屏障稳固是养肠达人配置，唯独S娇嫩敏感让你成了肠道瓷娃娃！换牛奶品牌、情绪小波动肠道就撒娇。慢慢摸索耐受边界，温柔待它。" },
+            "SNTD": { nickname: "底线蹦迪人", desc: "S娇嫩敏感让你饮食让步多吃膳食纤维，有了N自给+T规律，唯独D屏障受损代表你夜间出动、小酌一杯、月亮不睡你不睡。守住底线肠道就乖乖听话。" },
+            "SNUI": { nickname: "屎途刑者", desc: "S娇嫩敏感让你早早养肠，N自给+I稳固基础扎实，唯独U节律紊乱让你和自己较劲。饮食健康作息规律却仍被突发腹泻和便秘折磨，别急，肠道节律需要时间。" },
+            "SNUD": { nickname: "又菜又爱玩", desc: "S娇嫩不敢造次，养出N自给肠胃，奈何U节律紊乱+D屏障受损说明你又菜又爱玩。饮食谨慎却在熬夜酗酒上放纵，给肠道出难题，改掉坏习惯吧。" },
+            "SATI": { nickname: "真香循环", desc: "S娇嫩吃重口必翻车，T规律+I屏障让你恢复快，A外补依赖让你忍不住顿顿外卖。每次疼得直不起腰立flag“吃完这顿就收手”，下次秒变真香现场。" },
+            "SATD": { nickname: "摆烂人", desc: "S娇嫩肠道脆弱，T规律顺畅是唯一底气，而A外补依赖+D屏障受损让你对肠道摆烂。不主动调整，不拒绝重油，不负责后果。稍微用点心养肠会有惊喜。" },
+            "SAUI": { nickname: "咸鱼（不翻身版）", desc: "S娇嫩肠道易闹脾气，I屏障稳固不出大问题，U节律紊乱让排便随缘。你是躺平佛系派，肠道胀气就揉揉，腹泻就躺平。偶尔喂肠道粗粮蔬菜别太依赖补剂。" },
+            "SAUD": { nickname: "终身进步者", desc: "集齐S娇嫩+A外补依赖+U节律紊乱+D屏障受损四大挑战，意味着你是肠道的终身进步者！拥有99.99%上升空间，每个小小的养肠举动都会带来巨大改善，未来可期。" }
         };
 
-        // 状态
-        let currentIndex = 0;
-        let answers = new Array(questions.length).fill(null); // 存储分数1-5
-        let testCompleted = false;
+        // ---------- 16道全新题目（基于文件问卷表，完全按照1.1~4.4设计）----------
+        // 维度0:耐受度(G-S) 高分=G强韧；维度1营养供给(A-N) 需反向计分(因为原始题目描述倾向于N内源自给，最终我们要将维度1得分反转高分为A)
+        // 维度2节律(T-U) 高分=T规律；维度3屏障(I-D) 高分=I稳固
+        const questions = [
+            // 耐受度 4题 (每题1~5分，直接累加，越高→G)
+            { dim:0, text: "饮食大杂烩挑战：我可以冷热混吃（如火锅配冰饮）或尝试爆辣、重油食物，且事后肠胃基本无感。", options: getLikertOptions() },
+            { dim:0, text: "环境适应力：换城市出差、旅游或更换常喝的水品牌/外卖店时，我几乎不会出现水土不服或拉肚子的情况。", options: getLikertOptions() },
+            { dim:0, text: "极端压力测试：即使偶尔暴饮暴食、应酬喝酒或因为忙碌饥一顿饱一顿，我的肠道也不会立刻“罢工”或翻车。", options: getLikertOptions() },
+            { dim:0, text: "情绪波动免疫：在面对考试、演讲或工作高压时，我的肠道很淡定，不会因为紧张焦虑而频繁跑厕所。", options: getLikertOptions() },
+            // 营养供给 4题 (题目自然描述偏向N内源自给 → 反向计分，让高分最终对应A外补依赖)
+            { dim:1, text: "食材天然度：我的日常餐食多为亲手烹饪或健康的天然食材，极少依赖外卖、方便面或高添加剂的预制菜。", options: getLikertOptions() },
+            { dim:1, text: "膳食纤维密度：我每天都能摄入足量的深色蔬菜、全谷物（粗粮/杂豆）和新鲜果蔬，而不是纯肉主义。", options: getLikertOptions() },
+            { dim:1, text: "补剂依赖度：我的肠道很舒服，不需要长期靠益生菌、纤维粉等外源补剂来维持日常代谢。", options: getLikertOptions() },
+            { dim:1, text: "结构稳定性：我的饮食结构非常规律，不会为了减肥而极端节食或戒掉碳水。", options: getLikertOptions() },
+            // 节律 4题 (正向: 高分→T规律顺畅)
+            { dim:2, text: "排便生物钟：我有非常固定的排便习惯（如晨起或餐后），每天1-2次，且过程顺畅，不会在马桶上“长跑”。", options: getLikertOptions() },
+            { dim:2, text: "事后反馈：每次排便后感觉非常轻松、排得干净，便便成型且软硬适中，基本不会出现粘马桶或里急后重感。", options: getLikertOptions() },
+            { dim:2, text: "日常腹感：饭后我极少感到肚子胀气、鼓胀或出现明显的“肠鸣”声，小腹常年处于平坦舒畅的状态。", options: getLikertOptions() },
+            { dim:2, text: "节律韧性：即使偶尔熬夜或作息变动，我的肠道也能在1天内恢复排便规律，不会陷入数天不排或无预兆腹泻。", options: getLikertOptions() },
+            // 屏障 4题 (正向: 高分→I稳固完整)
+            { dim:3, text: "睡眠与昼夜节律：我作息规律，很少熬夜，每天能保证高质量且充足的睡眠，且没有长期黑白颠倒。", options: getLikertOptions() },
+            { dim:3, text: "药物史与炎症：近三个月内我没有使用过抗生素、止痛药或激素类药物，且没有频繁发作的肠胃炎史。", options: getLikertOptions() },
+            { dim:3, text: "情绪与内耗：我的情绪状态长期稳定，很少处于极度高压、焦虑或抑郁的心理内耗中。", options: getLikertOptions() },
+            { dim:3, text: "系统性表现：我的皮肤状态稳定（不易爆痘），身体免疫力好（不易过敏/感冒），且全天精力充沛，少有疲劳感。", options: getLikertOptions() }
+        ];
 
-        // DOM 元素 - 添加空值检查
-        function getElement(id) {
-            const el = document.getElementById(id);
-            if (!el) console.error(`元素 ${id} 未找到`);
-            return el;
+        function getLikertOptions() {
+            return [
+                { text: "完全不符合", score: 1 },
+                { text: "比较不符合", score: 2 },
+                { text: "不确定", score: 3 },
+                { text: "比较符合", score: 4 },
+                { text: "完全符合", score: 5 }
+            ];
         }
 
-        const testSection = getElement('testSection');
-        const resultSection = getElement('resultSection');
-        const questionText = getElement('questionText');
-        const questionNumLabel = getElement('questionNumLabel');
-        const dimensionName = getElement('dimensionName');
-        const dimensionRange = getElement('dimensionRange');
-        const optionsDiv = getElement('optionsContainer');
-        const prevBtn = getElement('prevBtn');
-        const nextBtn = getElement('nextBtn');
-        const restartTestBtn = getElement('restartTestBtn');
-        const retakeFromResultBtn = getElement('retakeFromResultBtn');
-        const progressText = getElement('progressText');
-        const progressFill = getElement('progressFill');
-        const resultTypeCode = getElement('resultTypeCode');
-        const resultNickname = getElement('resultNickname');
-        const typeDescription = getElement('typeDescription');
-        const dimensionBars = getElement('dimensionBars');
-        const dimensionScores = getElement('dimensionScores');
+        // 状态管理
+        let currentIndex = 0;
+        let answers = new Array(questions.length).fill(null);
+        let testCompleted = false;
+
+        // DOM元素
+        const testSection = document.getElementById('testSection');
+        const resultSection = document.getElementById('resultSection');
+        const questionText = document.getElementById('questionText');
+        const questionNumLabel = document.getElementById('questionNumLabel');
+        const dimensionName = document.getElementById('dimensionName');
+        const dimensionRange = document.getElementById('dimensionRange');
+        const optionsDiv = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartTestBtn = document.getElementById('restartTestBtn');
+        const retakeFromResultBtn = document.getElementById('retakeFromResultBtn');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const resultTypeCode = document.getElementById('resultTypeCode');
+        const resultNickname = document.getElementById('resultNickname');
+        const typeDescription = document.getElementById('typeDescription');
+        const dimensionBars = document.getElementById('dimensionBars');
+        const dimensionScores = document.getElementById('dimensionScores');
+        const imagePlaceholder = document.getElementById('imagePlaceholder');
 
         function updateProgress() {
-            const answered = answers.filter(a => a !== null).length;
-            const percent = (answered / questions.length) * 100;
-            if (progressFill) progressFill.style.width = percent + '%';
-            if (progressText) progressText.innerText = `${answered} / ${questions.length}`;
+            const answeredCount = answers.filter(v => v !== null).length;
+            const percent = (answeredCount / questions.length) * 100;
+            if(progressFill) progressFill.style.width = percent + '%';
+            if(progressText) progressText.innerText = `${answeredCount} / ${questions.length}`;
         }
 
         function renderQuestion() {
-            console.log(`渲染第 ${currentIndex + 1} 题`);
-            
-            // 检查关键元素
-            if (!questionText || !optionsDiv) {
-                console.error('关键DOM元素缺失');
-                return;
-            }
-            
             const q = questions[currentIndex];
-            if (!q) {
-                console.error('题目数据错误');
-                return;
-            }
-            
-            const dim = dimensions[q.dimension];
-            
-            // 更新题目文本
+            const dim = dimensions[q.dim];
+            dimensionName.innerText = dim.name;
+            dimensionRange.innerText = `${dim.left} ⇄ ${dim.right}`;
+            questionNumLabel.innerText = `第 ${currentIndex+1} / 16 题`;
             questionText.innerText = q.text;
-            questionNumLabel.innerText = `第 ${currentIndex+1} 题`;
-            if (dimensionName) dimensionName.innerText = dim.name;
-            if (dimensionRange) dimensionRange.innerText = `${dim.left} (强) ⇄ ${dim.right} (弱)`;
             
             const selectedScore = answers[currentIndex];
-            
-            // 生成选项HTML
             let html = '';
-            q.options.forEach((opt, idx) => {
-                const score = opt.score;
-                const isSelected = (selectedScore === score);
-                html += `
-                    <div class="option-btn ${isSelected ? 'selected' : ''}" data-score="${score}">
-                        <span class="option-score">${score}</span>
-                        <span class="option-text">${opt.text}</span>
-                    </div>
-                `;
+            q.options.forEach(opt => {
+                const isSelected = (selectedScore === opt.score);
+                html += `<div class="option-btn ${isSelected ? 'selected' : ''}" data-score="${opt.score}">
+                            <span class="option-score">${opt.score}</span>
+                            <span class="option-text">${opt.text}</span>
+                         </div>`;
             });
             optionsDiv.innerHTML = html;
             
-            // 绑定点击事件
             document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const score = parseInt(this.dataset.score);
-                    answers[currentIndex] = score;
-                    console.log(`第${currentIndex+1}题选择分数: ${score}`);
-                    renderQuestion(); // 重新渲染高亮
+                btn.addEventListener('click', (e) => {
+                    const scoreVal = parseInt(btn.dataset.score);
+                    answers[currentIndex] = scoreVal;
+                    renderQuestion();
                     updateProgress();
                     updateNavButtons();
                 });
             });
-            
             updateNavButtons();
-            updateProgress();
         }
 
         function updateNavButtons() {
-            if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+            prevBtn.disabled = (currentIndex === 0);
             const hasAnswer = answers[currentIndex] !== null;
-            if (nextBtn) {
-                if (currentIndex === questions.length - 1) {
-                    nextBtn.innerHTML = '查看肠格 <i class="fas fa-check-circle"></i>';
-                } else {
-                    nextBtn.innerHTML = '下一题 <i class="fas fa-arrow-right"></i>';
-                }
-                nextBtn.disabled = !hasAnswer;
+            if(currentIndex === questions.length-1) {
+                nextBtn.innerHTML = '查看肠格 <i class="fas fa-check-circle"></i>';
+            } else {
+                nextBtn.innerHTML = '下一题 <i class="fas fa-arrow-right"></i>';
             }
+            nextBtn.disabled = !hasAnswer;
         }
 
         function goToPrev() {
-            if (currentIndex > 0) { 
-                currentIndex--; 
-                renderQuestion(); 
-            }
+            if(currentIndex > 0) { currentIndex--; renderQuestion(); }
         }
-        
         function goToNext() {
-            if (answers[currentIndex] === null) return;
-            if (currentIndex === questions.length - 1) {
+            if(answers[currentIndex] === null) return;
+            if(currentIndex === questions.length-1) {
                 finishTest();
             } else {
                 currentIndex++;
@@ -749,144 +537,112 @@
         }
 
         function finishTest() {
-            console.log('完成测试，计算结果...');
-            
-            if (answers.includes(null)) {
-                alert('请回答所有题目后再查看肠格。');
+            if(answers.includes(null)) {
+                alert("请完成所有16道题目，解锁完整肠格报告~");
                 const firstNull = answers.findIndex(a => a === null);
-                if (firstNull !== -1) { 
-                    currentIndex = firstNull; 
-                    renderQuestion(); 
-                }
+                if(firstNull !== -1) { currentIndex = firstNull; renderQuestion(); }
                 return;
             }
             testCompleted = true;
-            
-            // 计算各维度总分 (每题1-5分，每个维度5题，总分5-25分)
-            const scores = [0, 0, 0, 0]; // G/A/T/I 倾向分数
-            
-            answers.forEach((score, idx) => {
-                const dim = questions[idx].dimension;
-                scores[dim] += score;
-            });
-            
-            console.log('维度得分:', scores);
-            
-            // 判定倾向：> 12.5 为左侧，≤ 12.5 为右侧
-            const typeChars = [];
-            for (let i = 0; i < 4; i++) {
-                const totalScore = scores[i];
-                const threshold = 12.5;
-                if (totalScore > threshold) {
-                    typeChars.push(dimensions[i].left);
-                } else {
-                    typeChars.push(dimensions[i].right);
+            // 计算维度分 (每个维度4题，总分范围4-20，阈值10)
+            let rawScores = [0,0,0,0];
+            for(let i=0; i<questions.length; i++) {
+                let score = answers[i];
+                let dimIdx = questions[i].dim;
+                // 维度1 (营养供给) 需要反向计分，因为原始题目是N倾向，我们需要最终高分为A（外补依赖）
+                if(dimIdx === 1) {
+                    score = 6 - score;   // 反转: 原始高分(健康天然)变成低分，原始低分变成高分 -> 符合A(外补依赖)高分
                 }
+                rawScores[dimIdx] += score;
             }
+            // rawScores[0]耐受 G分   rawScores[1]营养 A倾向高分   rawScores[2]节律 T高分   rawScores[3]屏障 I高分
+            const typeChars = [];
+            for(let i=0;i<4;i++) {
+                if(rawScores[i] > 10) typeChars.push(dimensions[i].left);
+                else typeChars.push(dimensions[i].right);
+            }
+            const finalCode = typeChars.join('');
+            const typeData = typeMap[finalCode] || { nickname: "神秘肠格", desc: "独特肠道人格，等待你的探索。" };
             
-            const typeCode = typeChars.join('');
-            console.log('肠格类型:', typeCode);
+            // 更新结果展示
+            resultTypeCode.innerText = finalCode;
+            resultNickname.innerText = typeData.nickname;
+            typeDescription.innerText = typeData.desc;
+            // 图片占位区 增加风格提示
+            imagePlaceholder.innerHTML = `<i class="fas fa-dragon"></i><span>🧙 【${typeData.nickname}】专属立绘预留</span><span style="font-size: 12px;">🎨 插图位置 · 个性小人待召唤</span>`;
+            // 绘制维度条 & 分数详解 (最大分20)
+            renderDimensionBars(rawScores);
+            renderDimensionScores(rawScores);
             
-            const detail = typeDetails[typeCode] || { nickname: "未知肠格", desc: "独特而复杂的肠道人格。" };
-            
-            if (resultTypeCode) resultTypeCode.innerText = typeCode;
-            if (resultNickname) resultNickname.innerText = detail.nickname;
-            if (typeDescription) typeDescription.innerText = detail.desc;
-            
-            renderDimensionBars(scores);
-            renderDimensionScores(scores);
-            
-            if (testSection) testSection.classList.add('hidden');
-            if (resultSection) resultSection.classList.remove('hidden');
+            testSection.classList.add('hidden');
+            resultSection.classList.remove('hidden');
         }
 
         function renderDimensionBars(scores) {
-            if (!dimensionBars) return;
-            
+            if(!dimensionBars) return;
+            const maxScore = 20;
             const createBar = (dimIdx, leftLabel, rightLabel, score) => {
-                const maxScore = 25;
                 const leftPercent = (score / maxScore) * 100;
                 const rightPercent = 100 - leftPercent;
-                return `
-                    <div class="dimension-item">
-                        <div class="dimension-label">
-                            <span>${leftLabel} (${score}分)</span>
-                            <span>${rightLabel} (${maxScore - score}分)</span>
-                        </div>
-                        <div class="bar-container">
-                            <span class="bar-left">${dimensions[dimIdx].left}</span>
-                            <div class="bar-bg">
-                                <div class="bar-fill-left" style="width:${leftPercent}%;"></div>
-                                <div class="bar-fill-right" style="width:${rightPercent}%;"></div>
+                return `<div class="dimension-item">
+                            <div class="dimension-label"><span>${leftLabel} (${score}分)</span><span>${rightLabel} (${maxScore-score}分)</span></div>
+                            <div class="bar-container">
+                                <span class="bar-left">${dimensions[dimIdx].left}</span>
+                                <div class="bar-bg"><div class="bar-fill-left" style="width:${leftPercent}%;"></div><div class="bar-fill-right" style="width:${rightPercent}%;"></div></div>
+                                <span class="bar-right">${dimensions[dimIdx].right}</span>
                             </div>
-                            <span class="bar-right">${dimensions[dimIdx].right}</span>
-                        </div>
-                    </div>
-                `;
+                         </div>`;
             };
-            
             dimensionBars.innerHTML = 
                 createBar(0, 'G 强韧耐造', 'S 娇嫩敏感', scores[0]) +
                 createBar(1, 'A 外补依赖', 'N 内源自给', scores[1]) +
                 createBar(2, 'T 规律顺畅', 'U 节律紊乱', scores[2]) +
                 createBar(3, 'I 稳固完整', 'D 屏障受损', scores[3]);
         }
-
+        
         function renderDimensionScores(scores) {
-            if (!dimensionScores) return;
-            
-            const dimNames = ['耐受度', '营养供给', '节律', '屏障'];
-            const leftNames = ['强韧(G)', '外补(A)', '规律(T)', '稳固(I)'];
-            const rightNames = ['敏感(S)', '自给(N)', '紊乱(U)', '受损(D)'];
-            
+            if(!dimensionScores) return;
+            const dimNames = ['耐受度', '营养供给', '排便节律', '屏障完整'];
+            const leftTips = ['G强韧耐造','A外补依赖','T规律顺畅','I稳固完整'];
+            const rightTips = ['S娇嫩敏感','N内源自给','U节律紊乱','D屏障受损'];
             let html = '<div style="display:grid; gap:8px;">';
-            for (let i = 0; i < 4; i++) {
-                const score = scores[i];
-                const tendency = score > 12.5 ? leftNames[i] : rightNames[i];
-                html += `<div style="display:flex; justify-content:space-between;">
-                    <span>${dimNames[i]}: ${score}/25分</span>
-                    <span style="font-weight:600;">→ ${tendency}</span>
-                </div>`;
+            for(let i=0;i<4;i++) {
+                const tendency = scores[i] > 10 ? leftTips[i] : rightTips[i];
+                html += `<div style="display:flex; justify-content:space-between;"><span>${dimNames[i]}: ${scores[i]}/20分</span><span style="font-weight:600;">→ ${tendency}</span></div>`;
             }
             html += '</div>';
             dimensionScores.innerHTML = html;
         }
 
         function resetTest() {
-            console.log('重置测试');
-            currentIndex = 0;
-            answers = new Array(questions.length).fill(null);
-            testCompleted = false;
-            if (testSection) testSection.classList.remove('hidden');
-            if (resultSection) resultSection.classList.add('hidden');
-            renderQuestion();
-            updateProgress();
+            if(confirm('重新测试将会清空当前所有进度，确定重测吗？')) {
+                currentIndex = 0;
+                answers = new Array(questions.length).fill(null);
+                testCompleted = false;
+                testSection.classList.remove('hidden');
+                resultSection.classList.add('hidden');
+                renderQuestion();
+                updateProgress();
+            }
         }
 
         // 绑定事件
-        if (prevBtn) prevBtn.addEventListener('click', goToPrev);
-        if (nextBtn) nextBtn.addEventListener('click', goToNext);
-        if (restartTestBtn) {
-            restartTestBtn.addEventListener('click', function() {
-                if(confirm('重新开始会丢失当前进度，确定吗？')) resetTest();
-            });
-        }
-        if (retakeFromResultBtn) {
-            retakeFromResultBtn.addEventListener('click', resetTest);
-        }
-
-        // 键盘支持
-        window.addEventListener('keydown', function(e) {
-            if (testSection && testSection.classList.contains('hidden')) return;
-            if (e.key === 'ArrowLeft' && prevBtn && !prevBtn.disabled) goToPrev();
-            else if (e.key === 'ArrowRight' && nextBtn && !nextBtn.disabled) goToNext();
+        prevBtn.addEventListener('click', goToPrev);
+        nextBtn.addEventListener('click', goToNext);
+        restartTestBtn.addEventListener('click', resetTest);
+        retakeFromResultBtn.addEventListener('click', resetTest);
+        
+        // 键盘左右支持
+        window.addEventListener('keydown', (e) => {
+            if(!testSection.classList.contains('hidden')) {
+                if(e.key === 'ArrowLeft' && !prevBtn.disabled) goToPrev();
+                else if(e.key === 'ArrowRight' && !nextBtn.disabled) goToNext();
+            }
         });
-
-        // 初始化渲染
-        console.log('开始渲染第一题...');
+        
+        // 启动
         renderQuestion();
         updateProgress();
-        console.log('初始化完成');
     })();
 </script>
 </body>
